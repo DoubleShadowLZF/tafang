@@ -26,4 +26,10 @@ declare module 'cc' {
   export const find: any;
   export const sys: any;
   export const view: any;
+
+  // 以下别名让同名导出同时可用于类型位置（如 `parent: Node`、`waypoints: Vec3[]`）。
+  // 值仍为 any；类型亦为 any，避免 tsc 因值-only 声明报 TS2749。
+  export type Node = any;
+  export type Vec3 = any;
+  export type Color = any;
 }
