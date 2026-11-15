@@ -32,7 +32,12 @@ export class SkillBar extends Component {
     const b = App.battle;
     if (!b) return;
     if (type === 'meteor') {
-      // 陨石需点选目标点，记录待释放
+      // 陨石需点选目标点：再次点击取消；冷却/次数耗尽不可激活
+      if (App.pendingSkill === 'meteor') {
+        App.pendingSkill = null;
+        return;
+      }
+      if (!b.skills.canUse('meteor')) return;
       App.pendingSkill = 'meteor';
       return;
     }

@@ -39,6 +39,24 @@ describe('WeChatAdapter', () => {
     expect(hide).toBe(1);
   });
 
+  it('offShow/offHide 转发到 env 的 offShow/offHide', () => {
+    let offShow = 0; let offHide = 0;
+    const wx: WeChatEnv = {
+      offShow: (cb) => { offShow++; cb(); },
+      offHide: (cb) => { offHide++; cb(); },
+    };
+    const adapter = new WeChatAdapter(wx);
+    adapter.offShow(() => {});
+    adapter.offHide(() => {});
+    expect(offShow).toBe(1);
+    expect(offHide).toBe(1);
+  });
+
+  it('env 无 offShow/offHide 时静默（不抛错）', () => {
+    const adapter = new WeChatAdapter({});
+    expect(() => { adapter.offShow(() => {}); adapter.offHide(() => {}); }).not.toThrow();
+  });
+
   it('setStorage/getStorage 委托 wx.setStorageSync/getStorageSync', () => {
     const store = new Map<string, unknown>();
     const wx: WeChatEnv = {

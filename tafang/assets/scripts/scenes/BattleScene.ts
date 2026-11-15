@@ -46,6 +46,8 @@ export class BattleScene extends Component {
   private skillBar!: SkillBar;
   private resultPanel!: ResultPanel;
   private bus!: EventBus<GameEvents>;
+  private onHideHandler = () => this.tryPause();
+  private onShowHandler = () => this.tryResume();
 
   start(): void {
     this.levelId = App.pendingLevel ?? this.levelId ?? 'level1';
@@ -69,10 +71,16 @@ export class BattleScene extends Component {
 
     this.wireEvents();
     input.on(Input.EventType.TOUCH_START, this.onTouch, this);
-    App.wechat.onHide(() => this.tryPause());
-    App.wechat.onShow(() => this.tryResume());
+    App.wechat.onHide(this.onHideHandler);
+    App.wechat.onShow(this.onShowHandler);
 
     this.battle.start();
+  }
+
+  onDestroy(): void {
+    input.off(Input.EventType.TOUCH_START, this.onTouch, this);
+    App.wechat.offHide(this.onHideHandler);
+    App.wechat.offShow(this.onShowHandler);
   }
 
   private buildCamera(): Camera {
@@ -146,6 +154,8 @@ export class BattleScene extends Component {
   }
 
   private onTouch(event: any): void {
+    // TODO(editor): 区分 UI 触摸与 3D 拾取（陨石蓄力时点击 UI 会误判为地面目标）；
+    // 在编辑器集成阶段用 UITransform hit-test 或分层 world-input 节点隔离。
     const pt = this.screenToGround(event.getLocation());
     if (!pt) return;
     if (App.pendingSkill === 'meteor') {
