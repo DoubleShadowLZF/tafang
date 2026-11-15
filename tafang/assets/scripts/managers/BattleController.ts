@@ -37,8 +37,6 @@ export class BattleController {
         this.game.setState('lost');
       }
     });
-    // 波次奖励
-    bus.on('waveEnded', (p) => this.economy.addGold(p.rewardGold));
   }
 
   start(): void {
@@ -53,9 +51,18 @@ export class BattleController {
     this.towers.update(dt);
     this.skills.update(dt);
     this.enemies.update(dt);
-    if (this.game.getState() !== 'playing') return; // 已失败则不再判胜
-    if (this.waves.allWavesDone && this.enemies.remainingCount() === 0) {
-      this.game.setState('won');
+    if (this.game.getState() !== 'playing') return; // 已失败则不再判胜/推进
+    // 当前波已刷完且场上无怪 → 波结束：发奖励，推进下一波或判胜
+    if (this.waves.isSpawningDone && this.enemies.remainingCount() === 0) {
+      const idx = this.waves.getCurrentWaveIndex();
+      const reward = this.waves.currentWaveReward;
+      this.economy.addGold(reward);
+      this.bus.emit('waveEnded', { waveIndex: idx, rewardGold: reward });
+      if (this.waves.hasNextWave) {
+        this.waves.startWave(idx + 1);
+      } else {
+        this.game.setState('won');
+      }
     }
   }
 }
