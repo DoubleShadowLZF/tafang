@@ -3,6 +3,8 @@ export interface WeChatEnv {
   shareAppMessage?: (opts: { title?: string; imageUrl?: string }) => void;
   onShow?: (cb: () => void) => void;
   onHide?: (cb: () => void) => void;
+  offShow?: (cb: () => void) => void;
+  offHide?: (cb: () => void) => void;
   setStorageSync?: (key: string, data: unknown) => void;
   getStorageSync?: (key: string) => unknown;
 }
@@ -37,6 +39,14 @@ export class WeChatAdapter {
 
   onHide(cb: () => void): void {
     this.wx.onHide?.(cb);
+  }
+
+  offShow(cb: () => void): void {
+    this.wx.offShow?.(cb);
+  }
+
+  offHide(cb: () => void): void {
+    this.wx.offHide?.(cb);
   }
 
   setStorage(key: string, data: unknown): void {
