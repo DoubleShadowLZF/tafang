@@ -43,10 +43,6 @@ export class WaveManager {
       }
       if (this.spawnCursor >= this.schedule.length) {
         this.phase = 'completed';
-        this.bus.emit('waveEnded', {
-          waveIndex: this.waveIndex,
-          rewardGold: this.waves[this.waveIndex].rewardGold,
-        });
       }
     }
     return due;
@@ -56,7 +52,15 @@ export class WaveManager {
     return this.waveIndex;
   }
 
-  get allWavesDone(): boolean {
-    return this.waveIndex === this.waves.length - 1 && this.phase === 'completed';
+  get isSpawningDone(): boolean {
+    return this.phase === 'completed';
+  }
+
+  get hasNextWave(): boolean {
+    return this.waveIndex >= 0 && this.waveIndex < this.waves.length - 1;
+  }
+
+  get currentWaveReward(): number {
+    return this.waveIndex >= 0 && this.waveIndex < this.waves.length ? this.waves[this.waveIndex].rewardGold : 0;
   }
 }

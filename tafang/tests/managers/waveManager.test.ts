@@ -12,11 +12,9 @@ const waves: WaveConfig[] = [
 function setup() {
   const bus = new EventBus<GameEvents>();
   const started = vi.fn();
-  const ended = vi.fn();
   bus.on('waveStarted', started);
-  bus.on('waveEnded', ended);
   const wm = new WaveManager(bus, waves);
-  return { wm, started, ended };
+  return { wm, started };
 }
 
 describe('WaveManager', () => {
@@ -37,12 +35,13 @@ describe('WaveManager', () => {
     expect(wm.update(0.1)).toEqual(['slime']);   // 累积到 1.0，第二个 spawn
   });
 
-  it('全部生成后 emit waveEnded 且 allWavesDone', () => {
-    const { wm, ended } = setup();
+  it('全部生成后进入 completed（isSpawningDone），单波无下一波', () => {
+    const { wm } = setup();
     wm.startWave(0);
     wm.update(3.0); // 跨过准备期
     wm.update(3.0); // 跨过全部生成
-    expect(ended).toHaveBeenCalledWith({ waveIndex: 0, rewardGold: 50 });
-    expect(wm.allWavesDone).toBe(true);
+    expect(wm.isSpawningDone).toBe(true);
+    expect(wm.hasNextWave).toBe(false);
+    expect(wm.currentWaveReward).toBe(50);
   });
 });

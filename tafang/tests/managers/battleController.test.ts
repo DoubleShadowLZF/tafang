@@ -25,6 +25,29 @@ function makeConfig(): ConfigSet {
   };
 }
 
+function makeMultiWaveConfig(): ConfigSet {
+  return {
+    towers: {
+      arrow: { name: '箭塔', levels: [{ cost: 50, atk: 100, range: 10, attackInterval: 0.1 }] },
+    } as any,
+    enemies: { slime: { maxHp: 10, speed: 1, armor: 0, rewardGold: 5, damageToBase: 1 } } as any,
+    levels: {
+      level1: {
+        name: '初始之森', initialGold: 100, lives: 5,
+        waypoints: [[0, 0, 0], [5, 0, 0]],
+        buildSlots: [[0, 0, 0]],
+        waves: ['w1', 'w2'],
+        skills: ['goldRain'],
+      },
+    },
+    waves: {
+      w1: { prepareTime: 0, rewardGold: 0, spawns: [{ type: 'slime', count: 1, interval: 0 }] },
+      w2: { prepareTime: 0, rewardGold: 0, spawns: [{ type: 'slime', count: 1, interval: 0 }] },
+    },
+    skills: { goldRain: { name: '金币雨', gold: 10, cooldown: 1, maxUses: 1 } } as any,
+  };
+}
+
 describe('BattleController', () => {
   it('击杀所有敌人后胜利', () => {
     const bus = new EventBus<GameEvents>();
@@ -48,5 +71,24 @@ describe('BattleController', () => {
     bc.update(0.1);  // 波次进入 spawning
     bc.update(10.0); // 刷怪 + 敌人走完 5 单位漏怪，lives 1->0
     expect(state).toBe('lost');
+  });
+
+  it('多波次依次推进并最终胜利', () => {
+    const bus = new EventBus<GameEvents>();
+    const bc = new BattleController(bus, makeMultiWaveConfig(), 'level1');
+    const states: string[] = [];
+    const ended: number[] = [];
+    bus.on('stateChanged', (p) => states.push(p.state));
+    bus.on('waveEnded', (p) => ended.push(p.waveIndex));
+    bc.start();
+    bc.towers.buildTower(0, 'arrow');
+    bc.update(1.0);  // 第 1 波准备结束
+    bc.update(0.1);  // 第 1 波刷怪 + 击杀 → 波结束 → 推进第 2 波
+    expect(ended).toEqual([0]);
+    expect(states).toEqual(['playing']); // 尚未胜利
+    bc.update(0.1);  // 第 2 波准备结束
+    bc.update(0.1);  // 第 2 波刷怪 + 击杀 → 波结束 → 判胜
+    expect(ended).toEqual([0, 1]);
+    expect(states).toEqual(['playing', 'won']);
   });
 });
