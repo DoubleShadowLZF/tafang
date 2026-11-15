@@ -27,9 +27,31 @@ declare module 'cc' {
   export const sys: any;
   export const view: any;
 
-  // 以下别名让同名导出同时可用于类型位置（如 `parent: Node`、`waypoints: Vec3[]`）。
-  // 值仍为 any；类型亦为 any，避免 tsc 因值-only 声明报 TS2749。
+  // 以下别名让同名导出同时可用于类型位置（如 `parent: Node`、`waypoints: Vec3[]`、
+  // `private goldLabel!: Label`、`private camera!: Camera`）。值仍为 any；类型亦为 any，
+  // 避免 tsc 因值-only 声明报 TS2749/TS2304。为覆盖后续任务全部类型位置用法，统一补齐 24 个。
+  export type _decorator = any;
+  export type Component = any;
   export type Node = any;
   export type Vec3 = any;
   export type Color = any;
+  export type director = any;
+  export type resources = any;
+  export type JsonAsset = any;
+  export type Label = any;
+  export type Button = any;
+  export type Sprite = any;
+  export type UITransform = any;
+  export type Canvas = any;
+  export type Camera = any;
+  export type Graphics = any;
+  export type Material = any;
+  export type MeshRenderer = any;
+  export type utils = any;
+  export type primitives = any;
+  export type input = any;
+  export type Input = any;
+  export type find = any;
+  export type sys = any;
+  export type view = any;
 }
