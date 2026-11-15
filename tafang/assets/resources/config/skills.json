@@ -1,0 +1,5 @@
+{
+  "meteor":    { "name": "陨石术",   "damage": 100, "radius": 3, "cooldown": 30, "maxUses": 2 },
+  "frostNova": { "name": "冰霜新星", "slowPercent": 0.6, "duration": 5, "cooldown": 20, "maxUses": 3 },
+  "goldRain":  { "name": "金币雨",   "gold": 150, "cooldown": 45, "maxUses": 1 }
+}

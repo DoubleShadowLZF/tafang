@@ -1,0 +1,22 @@
+{
+  "arrow": { "name": "箭塔", "levels": [
+    { "cost": 50,  "atk": 12, "range": 6,   "attackInterval": 0.6, "upgradeCost": 60 },
+    { "cost": 60,  "atk": 24, "range": 6.5, "attackInterval": 0.5, "upgradeCost": 100 },
+    { "cost": 100, "atk": 45, "range": 7,   "attackInterval": 0.4 }
+  ] },
+  "ice": { "name": "冰霜塔", "slow": { "percent": 0.5, "duration": 2 }, "levels": [
+    { "cost": 70,  "atk": 6,  "range": 5.5, "attackInterval": 0.8, "upgradeCost": 80 },
+    { "cost": 80,  "atk": 12, "range": 6,   "attackInterval": 0.8, "upgradeCost": 120 },
+    { "cost": 120, "atk": 20, "range": 6.5, "attackInterval": 0.7 }
+  ] },
+  "fire": { "name": "烈焰塔", "aoe": { "radius": 2.5, "burnDps": 8, "burnDuration": 2 }, "levels": [
+    { "cost": 90,  "atk": 18, "range": 5,   "attackInterval": 1.2, "upgradeCost": 110 },
+    { "cost": 110, "atk": 32, "range": 5.5, "attackInterval": 1.2, "upgradeCost": 160 },
+    { "cost": 160, "atk": 55, "range": 6,   "attackInterval": 1.0 }
+  ] },
+  "arcane": { "name": "奥术塔", "armorIgnore": true, "levels": [
+    { "cost": 120, "atk": 60,  "range": 6,   "attackInterval": 1.5, "upgradeCost": 140 },
+    { "cost": 140, "atk": 110, "range": 6.5, "attackInterval": 1.5, "upgradeCost": 200 },
+    { "cost": 200, "atk": 200, "range": 7,   "attackInterval": 1.4 }
+  ] }
+}
