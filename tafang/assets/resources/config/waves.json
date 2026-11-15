@@ -1,0 +1,30 @@
+{
+  "w1": { "prepareTime": 5, "rewardGold": 50, "spawns": [
+    { "type": "slime", "count": 8, "interval": 1.0 },
+    { "type": "wolf",  "count": 4, "interval": 1.5 }
+  ] },
+  "w2": { "prepareTime": 5, "rewardGold": 80, "spawns": [
+    { "type": "wolf",  "count": 6, "interval": 1.0 },
+    { "type": "bat",   "count": 5, "interval": 0.8 },
+    { "type": "golem", "count": 2, "interval": 2.0 }
+  ] },
+  "w3": { "prepareTime": 8, "rewardGold": 120, "isElite": true, "spawns": [
+    { "type": "elite", "count": 3, "interval": 2.0 },
+    { "type": "golem", "count": 4, "interval": 1.5 },
+    { "type": "boss",  "count": 1, "interval": 0 }
+  ] },
+  "w4": { "prepareTime": 5, "rewardGold": 70, "spawns": [
+    { "type": "wolf", "count": 8, "interval": 1.0 },
+    { "type": "bat",  "count": 6, "interval": 0.8 }
+  ] },
+  "w5": { "prepareTime": 8, "rewardGold": 130, "isBoss": true, "spawns": [
+    { "type": "golem", "count": 5, "interval": 1.5 },
+    { "type": "elite", "count": 3, "interval": 2.0 },
+    { "type": "boss",  "count": 1, "interval": 0 }
+  ] },
+  "w6": { "prepareTime": 10, "rewardGold": 200, "isBoss": true, "spawns": [
+    { "type": "elite", "count": 5, "interval": 2.0 },
+    { "type": "golem", "count": 5, "interval": 1.5 },
+    { "type": "boss",  "count": 2, "interval": 3.0 }
+  ] }
+}

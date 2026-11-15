@@ -1,0 +1,8 @@
+{
+  "slime": { "maxHp": 40,   "speed": 2,   "armor": 0,  "rewardGold": 5,   "damageToBase": 1 },
+  "wolf":  { "maxHp": 70,   "speed": 3.5, "armor": 0,  "rewardGold": 8,   "damageToBase": 1 },
+  "golem": { "maxHp": 300,  "speed": 1,   "armor": 20, "rewardGold": 30,  "damageToBase": 3 },
+  "bat":   { "maxHp": 55,   "speed": 4,   "armor": 5,  "rewardGold": 10,  "damageToBase": 1 },
+  "elite": { "maxHp": 400,  "speed": 1.8, "armor": 10, "rewardGold": 50,  "damageToBase": 2 },
+  "boss":  { "maxHp": 2000, "speed": 0.8, "armor": 30, "rewardGold": 200, "damageToBase": 5 }
+}

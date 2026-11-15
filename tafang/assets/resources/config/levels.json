@@ -1,0 +1,23 @@
+{
+  "level1": {
+    "name": "初始之森", "initialGold": 200, "lives": 20,
+    "waypoints": [[-8, 0, -8], [-8, 0, 0], [0, 0, 0], [0, 0, 8], [8, 0, 8]],
+    "buildSlots": [[-6, 0, -3], [-3, 0, -4], [-4, 0, 2], [2, 0, 4], [5, 0, 2], [4, 0, -2]],
+    "waves": ["w1", "w2", "w3"],
+    "skills": ["meteor", "frostNova", "goldRain"]
+  },
+  "level2": {
+    "name": "风语峡谷", "initialGold": 250, "lives": 18,
+    "waypoints": [[-10, 0, 0], [-4, 0, 0], [-4, 0, 6], [4, 0, 6], [4, 0, -6], [10, 0, -6]],
+    "buildSlots": [[-7, 0, 2], [-4, 0, 3], [0, 0, 6], [4, 0, 0], [7, 0, -3], [-1, 0, -3]],
+    "waves": ["w4", "w5"],
+    "skills": ["meteor", "frostNova", "goldRain"]
+  },
+  "level3": {
+    "name": "远古遗迹", "initialGold": 300, "lives": 15,
+    "waypoints": [[-10, 0, 10], [-5, 0, 10], [-5, 0, -10], [5, 0, -10], [5, 0, 10], [10, 0, 10]],
+    "buildSlots": [[-8, 0, 6], [-5, 0, 0], [0, 0, -10], [5, 0, 0], [8, 0, 6], [0, 0, 10]],
+    "waves": ["w6"],
+    "skills": ["meteor", "frostNova", "goldRain"]
+  }
+}
