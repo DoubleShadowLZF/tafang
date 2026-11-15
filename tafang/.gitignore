@@ -5,3 +5,9 @@ library/
 local/
 build/
 profiles/
+
+# IDE / editor / local tooling (plugin caches + local settings; no shared .claude/ content in this project)
+.idea/
+.agents/
+.claude/
+skills-lock.json
